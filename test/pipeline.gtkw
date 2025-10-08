@@ -1,0 +1,30 @@
+[*]
+[*] GTKWave Analyzer v3.4.0 (w)1999-2022 BSI
+[*] Wed Oct  8 12:27:41 2025
+[*]
+[dumpfile] "/home/prem/asic_tools/RISC_V/RGB/pipelined3/ttsky-pipeline-test/test/tb.vcd"
+[dumpfile_mtime] "Wed Oct  8 12:20:24 2025"
+[dumpfile_size] 28997
+[savefile] "/home/prem/asic_tools/RISC_V/RGB/pipelined3/ttsky-pipeline-test/test/pipeline.gtkw"
+[timestart] 0
+[size] 1920 1033
+[pos] -51 -51
+*-15.886230 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[sst_width] 297
+[signals_width] 206
+[sst_expanded] 1
+[sst_vpaned_height] 309
+@28
+tb.clk
+tb.rst_n
+@22
+tb.ui_in[7:0]
+tb.uio_in[7:0]
+tb.uio_oe[7:0]
+tb.uio_out[7:0]
+tb.uo_out[7:0]
+tb.PC_OUT[31:0]
+@23
+tb.DATA_MEM_OUT_TOP[31:0]
+[pattern_trace] 1
+[pattern_trace] 0

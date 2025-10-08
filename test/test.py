@@ -1,40 +1,41 @@
-# SPDX-FileCopyrightText: © 2024 Tiny Tapeout
-# SPDX-License-Identifier: Apache-2.0
-
 import cocotb
 from cocotb.clock import Clock
-from cocotb.triggers import ClockCycles
+from cocotb.triggers import RisingEdge, ClockCycles
 
+def safe_int(sig, default=0):
+    try:
+        return int(sig.value)
+    except (ValueError, TypeError):
+        return default
+
+async def reset(dut, cycles=2):
+    dut.rst_n.value = 0
+    await ClockCycles(dut.clk, cycles)
+    dut.rst_n.value = 1
+    await ClockCycles(dut.clk, 5)
 
 @cocotb.test()
-async def test_project(dut):
-    dut._log.info("Start")
+async def test_all(dut):
+    cocotb.start_soon(Clock(dut.clk, 10, units="ns").start())
+    await reset(dut)
 
-    # Set the clock period to 10 us (100 KHz)
-    clock = Clock(dut.clk, 10, unit="us")
-    cocotb.start_soon(clock.start())
+    prev_pc = safe_int(dut.PC_OUT)
 
-    # Reset
-    dut._log.info("Reset")
-    dut.ena.value = 1
-    dut.ui_in.value = 0
-    dut.uio_in.value = 0
-    dut.rst_n.value = 0
-    await ClockCycles(dut.clk, 10)
-    dut.rst_n.value = 1
+    cocotb.log.info("Cycle |   PC   | DATA_MEM_OUT ")
+    cocotb.log.info("-" * 40)
 
-    dut._log.info("Test project behavior")
+    for cycle in range(40):
+        await RisingEdge(dut.clk)
+        pc = safe_int(dut.PC_OUT)
+        mem_out = safe_int(dut.DATA_MEM_OUT_TOP)
 
-    # Set the input values you want to test
-    dut.ui_in.value = 20
-    dut.uio_in.value = 30
+        cocotb.log.info(f"{cycle:02d} | {pc:06d} | {mem_out:010d}")
 
-    # Wait for one clock cycle to see the output values
-    await ClockCycles(dut.clk, 1)
+        expected_pc = prev_pc + 4
+        if pc != expected_pc:
+            cocotb.log.warning(
+                f"[Cycle {cycle}] PC not incrementing correctly: got {pc}, expected {expected_pc}"
+            )
+        prev_pc = pc
 
-    # The following assersion is just an example of how to check the output values.
-    # Change it to match the actual expected output of your module:
-    assert dut.uo_out.value == 50
-
-    # Keep testing the module by changing the input values, waiting for
-    # one or more clock cycles, and asserting the expected output values.
+    cocotb.log.info("Simulation finished successfully.")

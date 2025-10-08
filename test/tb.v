@@ -22,18 +22,25 @@ module tb ();
   wire [7:0] uo_out;
   wire [7:0] uio_out;
   wire [7:0] uio_oe;
-`ifdef GL_TEST
-  wire VPWR = 1'b1;
-  wire VGND = 1'b0;
-`endif
+
+wire [31:0] PC_OUT;
+wire [31:0] DATA_MEM_OUT_TOP;
+
+assign PC_OUT = {31'b0, uo_out[0]};
+assign DATA_MEM_OUT_TOP = {31'b0, uo_out[1]};
+
+  
+  `ifdef GL_TEST
+    wire VPWR = 1'b1;
+    wire VGND = 1'b0;
+  `endif
 
   // Replace tt_um_example with your module name:
-  tt_um_example user_project (
-
+  tt_um_prem_pipeline_test   tt_um_prem_pipeline_test (
       // Include power ports for the Gate Level test:
 `ifdef GL_TEST
-      .VPWR(VPWR),
-      .VGND(VGND),
+  .VPWR(VPWR),
+  .VGND(VGND),
 `endif
 
       .ui_in  (ui_in),    // Dedicated inputs
@@ -45,5 +52,4 @@ module tb ();
       .clk    (clk),      // clock
       .rst_n  (rst_n)     // not reset
   );
-
 endmodule

@@ -6,15 +6,14 @@ sections.
 You can also include images in this folder and reference them in the markdown. Each image must be less than
 512 kb in size, and the combined size of all images must be less than 1 MB.
 -->
+## How it work
 
-## How it works
-
-Explain how your project works
+This project is a RISC-V pipelined processor with a 5-stage pipeline. It allows multiple instruction to be processed simultaneously.
 
 ## How to test
 
-Explain how to use your project
+Ensure different instruction types (arithmetic, load/store, branch, jump, etc.) execute correctly in the pipeline stages.
 
 ## External hardware
 
-List external hardware used in your project (e.g. PMOD, LED display, etc), if any
+Control signals, SRAM, connecting cables
