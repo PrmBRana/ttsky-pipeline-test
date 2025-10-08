@@ -1,5 +1,5 @@
 # Tiny Tapeout project information
-Project:       
+project:       
   title:        "Pipeline-test"      # Project title
   author:       "Prem"      # Your name
   discord:      "prem_42503"      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
@@ -19,12 +19,16 @@ Project:
   source_files:
     - "project.v"
     - "tt_um_prem_pipeline_test.v"
-    - " ALU.v clk.v Control_Unit.v"
-    - "DataMem.v EX_Mux.v"
+    - "ALU.v" 
+    - "clk.v" 
+    - "Control_Unit.v"
+    - "DataMem.v" 
+    - "EX_Mux.v"
     - "EX_stage.v" 
     - "Hazard_Unit.v"
     - "IF_ID_stage.v" 
-    - "imm.v Instruction_Mem.v"
+    - "imm.v" 
+    - "Instruction_Mem.v"
     - "Mem_stage.v"
     - "PC_incre.v"
     - "PCSelect.v"
