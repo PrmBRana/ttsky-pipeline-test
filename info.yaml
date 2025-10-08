@@ -1,5 +1,5 @@
 # Tiny Tapeout project information
-Project:
+Project:        "tt_um_prem_pipeline_test"
   title:        "Pipeline-test"      # Project title
   author:       "Prem"      # Your name
   discord:      "prem_42503"      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
