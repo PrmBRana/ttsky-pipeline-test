@@ -1,11 +1,11 @@
 # Tiny Tapeout project information
-Project:        "tt_um_prem_pipeline_test"
+Project:       
   title:        "Pipeline-test"      # Project title
   author:       "Prem"      # Your name
   discord:      "prem_42503"      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
   description:  "Zero to ASIC demo project"      # One line description of what your project does
   language:     "Verilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
-  clock_hz:     10M       # Clock frequency in Hz (or 0 if not applicable)
+  clock_hz:     1000000       # Clock frequency in Hz (or 0 if not applicable)
 
   # How many tiles your design occupies? A single tile is about 167x108 uM.
   tiles: "1x1"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
