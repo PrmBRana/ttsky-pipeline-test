@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2024 Your Name
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 `default_nettype none
 
 module tt_um_prem_pipeline_test (
@@ -13,28 +18,19 @@ module tt_um_prem_pipeline_test (
 
     wire rst = !rst_n;
 
-    // Clean unused inputs
-    wire [7:0] ui_in_clean  = ui_in & 8'b00000000;
-    wire [7:0] uio_in_clean = uio_in & 8'b00000000;
+    // Example: Drive output pins partially
+    assign uo_out[7:2] = 6'b00_0000;
 
-    // Unused dedicated outputs
-    assign uo_out[7:2] = 6'b000000;
-
-    // Unused bidirectional outputs and enable
-    assign uio_out = 8'b00000000;
-    assign uio_oe  = 8'b00000000;
-
-    // Intermediate wires for pipeline outputs
-    wire pc_out, data_mem_out_top;
-    assign uo_out[0] = pc_out;
-    assign uo_out[1] = data_mem_out_top;
+    // Example: Set bidirectional pins as input mode
+    assign uio_oe = 8'b0000_0000;
+    assign uio_out = 8'b0000_0000;
 
     // Instantiate pipeline module
-    pipeline pipeline_inst (
+    pipeline pipeline (
         .clk(clk),
         .reset(rst),
-        .PC_OUT(pc_out),
-        .DATA_MEM_OUT_TOP(data_mem_out_top)
+        .PC_OUT(uo_out[0]),
+        .DATA_MEM_OUT_TOP(uo_out[1])
     );
-
 endmodule
+
