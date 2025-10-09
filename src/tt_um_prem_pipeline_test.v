@@ -23,7 +23,7 @@ module tt_um_prem_pipeline_test (
     assign uio_out[2:0] = 3'b101; // example pattern
 
     // Example: Set bidirectional pins as input mode
-    assign uio_oe = 8'b00000000;:
+    assign uio_oe = 8'b00000000;
 
     // Instantiate pipeline module
     pipeline pipeline (
