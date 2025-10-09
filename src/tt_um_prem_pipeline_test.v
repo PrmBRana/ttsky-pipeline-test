@@ -1,8 +1,3 @@
-/*
- * Copyright (c) 2024 Your Name
- * SPDX-License-Identifier: Apache-2.0
- */
-
 `default_nettype none
 
 module tt_um_prem_pipeline_test (
@@ -18,15 +13,15 @@ module tt_um_prem_pipeline_test (
 
     wire rst = !rst_n;
 
-    // Example: Drive output pins partially
-    assign uio_out[7:3] = 5'b00000;
-    assign uio_out[2:0] = 3'b101; // example pattern
+    // Unused bidirectional outputs
+    assign uio_out = 8'b00000000;
+    assign uio_oe  = 8'b00000000;
 
-    // Example: Set bidirectional pins as input mode
-    assign uio_oe = 8'b00000000;
+    // Unused dedicated outputs
+    assign uo_out[7:2] = 6'b000000;
 
-    // Instantiate pipeline module
-    pipeline pipeline (
+    // Instantiate your core pipeline module
+    pipeline pipeline_inst (
         .clk(clk),
         .reset(rst),
         .PC_OUT(uo_out[0]),
@@ -34,4 +29,3 @@ module tt_um_prem_pipeline_test (
     );
 
 endmodule
-
