@@ -1,10 +1,3 @@
-/*
- * Copyright (c) 2024 Your Name
- * SPDX-License-Identifier: Apache-2.0
- */
-
-`default_nettype none
-
 module tt_um_prem_pipeline_test (
     input  wire [7:0] ui_in,    // Dedicated inputs
     output wire [7:0] uo_out,   // Dedicated outputs
@@ -18,19 +11,16 @@ module tt_um_prem_pipeline_test (
 
     wire rst = !rst_n;
 
-    // Example: Drive output pins partially
-    assign uo_out[7:2] = 6'b00_0000;
-
-    // Example: Set bidirectional pins as input mode
-    assign uio_oe = 8'b0000_0000;
-    assign uio_out = 8'b0000_0000;
+    // Connect inputs to outputs for testing
+    assign uo_out = ui_in;       // drive outputs from inputs
+    assign uio_out = uio_in;     // loop back IO inputs
+    assign uio_oe = 8'hFF;       // enable all bidirectional pins
 
     // Instantiate pipeline module
-    pipeline pipeline (
+    pipeline pipeline_inst (
         .clk(clk),
         .reset(rst),
         .PC_OUT(uo_out[0]),
         .DATA_MEM_OUT_TOP(uo_out[1])
     );
 endmodule
-
