@@ -3,9 +3,9 @@ module Ins_Mem (
     input  wire [31:0] read_Address,    // Program counter (word-aligned)
     output wire [31:0] Instruction_out  // Fetched instruction
 );
-    reg [31:0] I_Mem[0:255];
+    reg [31:0] I_Mem[0:16384];   //64 KB
 
     // Word-aligned access with range masking
-    assign Instruction_out = I_Mem[read_Address[9:2]];
+    assign Instruction_out = I_Mem[read_Address[15:2]];
 
 endmodule
