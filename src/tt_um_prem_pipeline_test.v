@@ -13,19 +13,28 @@ module tt_um_prem_pipeline_test (
 
     wire rst = !rst_n;
 
-    // Unused bidirectional outputs
-    assign uio_out = 8'b00000000;
-    assign uio_oe  = 8'b00000000;
+    // Clean unused inputs
+    wire [7:0] ui_in_clean  = ui_in & 8'b00000000;
+    wire [7:0] uio_in_clean = uio_in & 8'b00000000;
 
     // Unused dedicated outputs
     assign uo_out[7:2] = 6'b000000;
 
-    // Instantiate your core pipeline module
+    // Unused bidirectional outputs and enable
+    assign uio_out = 8'b00000000;
+    assign uio_oe  = 8'b00000000;
+
+    // Intermediate wires for pipeline outputs
+    wire pc_out, data_mem_out_top;
+    assign uo_out[0] = pc_out;
+    assign uo_out[1] = data_mem_out_top;
+
+    // Instantiate pipeline module
     pipeline pipeline_inst (
         .clk(clk),
         .reset(rst),
-        .PC_OUT(uo_out[0]),
-        .DATA_MEM_OUT_TOP(uo_out[1])
+        .PC_OUT(pc_out),
+        .DATA_MEM_OUT_TOP(data_mem_out_top)
     );
 
 endmodule
